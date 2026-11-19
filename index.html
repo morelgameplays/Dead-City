@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>DEAD CITY</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js" onerror="var s=document.createElement('script');s.src='https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js';document.head.appendChild(s)"></script>
+</head>
+<body>
+<div id="stage">
+  <canvas id="g"></canvas>
+  <div id="pad" hidden>
+    <div id="aim" aria-label="Mira"><div id="aimr"><div id="aimk"></div></div></div>
+    <div id="stick" aria-label="Analógico"><div id="knob"></div></div>
+    <button id="bE" data-k="e" data-pb="X" aria-label="Porta" hidden>🚪</button>
+    <button id="bJ" data-k="j" data-pb="A" aria-label="Pular">⤒</button>
+  </div>
+  <button id="bZoom" type="button" aria-label="Zoom" hidden>🔍</button>
+  <button id="bBag" data-pb="LB" aria-label="Mochila" hidden>🎒<i id="bagN" hidden></i></button>
+  <div id="bag" hidden>
+    <div class="bh"><b>🎒 MOCHILA</b><span id="bagCap"></span><button id="bagX" type="button" data-pb="B" aria-label="Fechar">✕</button></div>
+    <div id="bagGrid"></div>
+    <div id="bagInfo"></div>
+    <div id="bagAct"></div>
+    <div id="bagHint">🎮 ←↑↓→ escolher · A usar · X largar · Y dar · B ou LB fechar</div>
+  </div>
+  <div id="gpOn" aria-label="Controle conectado">🎮 <b>ON</b></div>
+  <div id="padCfg" hidden>
+    <h2>🎮 CONFIGURAR CONTROLE</h2>
+    <div id="pcN"></div>
+    <div id="pcT"></div>
+    <div class="pcr"><button id="pcSkip" type="button">PULAR</button><button id="pcDef" type="button">PADRÃO XBOX</button><button id="pcCancel" type="button">CANCELAR</button></div>
+  </div>
+  <div id="cover" hidden><img id="coverBg" src="assets/cover.jpg" alt=""><img id="coverImg" src="assets/cover.jpg" alt="Dead City"><button id="bPlay" type="button">TOQUE PARA JOGAR</button></div>
+  <button id="bSkip" type="button" hidden>PULAR ⏭</button>
+  <div id="menu" hidden>
+    <h1>DEAD CITY</h1>
+    <p class="sub">sobrevivência zumbi · online</p>
+    <div class="row">
+      <input id="nm" maxlength="12" placeholder="Seu nome" autocomplete="off">
+      <div id="chs">
+        <button class="ch on" data-c="k"><img id="imK" alt=""><span>Kemuel</span></button>
+        <button class="ch" data-c="y"><img id="imY" alt=""><span>Yago</span></button>
+      </div>
+    </div>
+    <div class="row"><button id="bSolo">JOGAR SOLO</button><button id="bHost">CRIAR SALA</button></div>
+    <div class="row"><input id="jc" maxlength="4" placeholder="CÓDIGO" autocomplete="off"><button id="bJoin">ENTRAR</button></div>
+    <div class="row"><button id="bCfg" type="button">🎮 CONFIGURAR CONTROLE</button></div>
+    <div id="msg">Carregando sprites…</div>
+    <p class="how">PC: ←→ mover · ↑ mirar · ↓ agachar · Espaço pular · J atirar · E porta/escada · I mochila (1–6 usa item)<br>Celular: analógico esquerdo anda/agacha · arraste no lado direito da tela para mirar e atirar (360°) · ⤒ pula · 🚪 portas e escadas · 🎒 mochila<br>Controle (Xbox 360): analógico esq. move · analógico dir. mira e atira enquanto inclinado · RT (R2) atira segurando · A pula · B agacha · X porta/escada · LB (L1) mochila (setas escolhem · A usa · X larga · Y dá · B ou LB fecha) · botões trocados? CONFIGURAR CONTROLE</p>
+  </div>
+</div>
+<script src="js/sprites.js"></script>
+<script src="js/hzombies.js"></script>
+<script src="js/maps.js"></script>
+<script src="js/zones.js"></script>
+<script src="js/furn.js"></script>
+<script src="js/zombies.js"></script>
+<script src="js/climber.js"></script>
+<script src="js/clock.js"></script>
+<script src="js/combat.js"></script>
+<script src="js/player.js"></script>
+<script src="js/multiplayer.js"></script>
+<script src="js/game.js"></script>
+<script src="js/bag.js"></script>
+<script src="js/controls.js"></script>
+<script src="js/music.js"></script>
+<script src="js/sfx.js"></script>
+<script src="js/ambience.js"></script>
+<script src="js/sfx_loot.js"></script>
+<script src="js/intro.js"></script>
+</body>
+</html>

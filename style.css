@@ -1,0 +1,96 @@
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:#050308;overflow:hidden;font-family:system-ui,Arial,sans-serif;color:#eee}
+body{display:grid;place-items:center}
+#stage{position:relative;width:min(100vw,calc(100dvh * 800 / 480));aspect-ratio:800/480;container-type:size;background:#000;touch-action:none;user-select:none;-webkit-user-select:none}
+#g{position:absolute;inset:0;width:100%;height:100%;display:block}
+#menu{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.2cqh;background:rgba(5,3,12,.72);text-align:center}
+#menu h1{margin:0;font-size:12cqh;letter-spacing:.5cqh;color:#c4161c;text-shadow:0 0 2cqh #ff2a2a,0 .8cqh 0 #4a0508;font-family:Impact,'Arial Black',sans-serif}
+.sub{margin:0;font-size:3cqh;color:#9a8fb0;letter-spacing:.3cqh}
+.row{display:flex;gap:2cqw;align-items:center;justify-content:center}
+#menu input{width:20cqw;font-size:4cqh;padding:1cqh 1.5cqw;border-radius:1cqh;border:2px solid #5b2a30;background:#150a10;color:#fff;text-align:center;text-transform:none}
+#jc{text-transform:uppercase;letter-spacing:.4cqh}
+#menu button{font-size:4cqh;font-weight:800;padding:1.4cqh 2.4cqw;border-radius:1.2cqh;border:0;background:#b3141b;color:#fff;box-shadow:0 .7cqh 0 #55080c}
+#menu button:active{transform:translateY(.5cqh);box-shadow:0 .2cqh 0 #55080c}
+#menu button:disabled{opacity:.45}
+#chs{display:flex;gap:1.5cqw}
+#menu .ch{display:flex;flex-direction:column;align-items:center;padding:.6cqh 1.2cqw;background:#1b1118;box-shadow:none;border:2px solid #3a2530;font-size:2.6cqh}
+#menu .ch.on{border-color:#ff3b3b;background:#33141b}
+.ch img{height:11cqh;width:auto}
+#msg{min-height:4cqh;font-size:3.2cqh;color:#ffcf6b}
+#msg.err{color:#ff7b7b}
+.how{margin:0;font-size:1.6cqh;line-height:1.35;color:#7d7390;max-width:88cqw}
+#pad{position:absolute;inset:0;pointer-events:none;touch-action:none;--b:min(21cqh,90px);--s:min(34cqh,170px)}
+#pad>*{pointer-events:auto;touch-action:none}
+#stick{position:absolute;left:5cqw;bottom:6cqh;width:var(--s);height:var(--s);border-radius:50%;background:rgba(255,255,255,.18);border:3px solid rgba(255,255,255,.5);box-shadow:0 2px 10px rgba(0,0,0,.25)}
+#stick::before{content:"";position:absolute;inset:-34px}
+#knob{position:absolute;left:50%;top:50%;width:44%;height:44%;margin:-22% 0 0 -22%;border-radius:50%;background:rgba(190,30,40,.8);border:3px solid rgba(255,255,255,.85);pointer-events:none}
+#aim{position:absolute;top:0;bottom:0;left:50%;right:0;background:transparent;-webkit-tap-highlight-color:transparent}
+#aimr{display:none;position:absolute;width:calc(var(--b)*1.5);height:calc(var(--b)*1.5);margin:calc(var(--b)*-.75) 0 0 calc(var(--b)*-.75);border-radius:50%;border:3px solid rgba(120,235,255,.75);background:rgba(0,200,255,.12);box-shadow:0 0 14px rgba(0,220,255,.3);pointer-events:none}
+#aimk{position:absolute;left:50%;top:50%;width:42%;height:42%;margin:-21% 0 0 -21%;border-radius:50%;background:rgba(0,190,240,.85);border:3px solid rgba(255,255,255,.9)}
+#bJ{position:absolute;right:3cqw;bottom:5cqh;width:calc(var(--b)*1.35);height:calc(var(--b)*1.35);border-radius:24%;border:3px solid rgba(255,255,255,.8);background:rgba(47,63,208,.8);color:#fff;font-size:calc(var(--b)*.7);line-height:1;padding:0;box-shadow:0 3px 10px rgba(0,0,0,.35)}
+#bJ::before{content:"";position:absolute;inset:-18px}
+#bE{position:absolute;right:3cqw;bottom:calc(5cqh + var(--b)*1.35 + 14px);width:calc(var(--b)*1.35);height:calc(var(--b)*1.35);border-radius:24%;border:3px solid rgba(255,255,255,.85);background:rgba(224,150,20,.88);color:#fff;font-size:calc(var(--b)*.62);line-height:1;padding:0;box-shadow:0 3px 10px rgba(0,0,0,.35)}
+#bE::before{content:"";position:absolute;inset:-18px}
+#bE.on,#bJ.on{transform:scale(.92);filter:brightness(1.25)}
+body.padmode #stick{opacity:.25}
+.gpf{outline:3px solid #ffcf6b!important;outline-offset:3px}
+[hidden]{display:none!important}
+@media (orientation:portrait){#stage::after{content:"Gire o celular (modo paisagem) para jogar melhor";position:absolute;left:0;right:0;top:100%;margin-top:10px;text-align:center;color:#ffcf6b;font-size:14px;font-weight:700}}
+
+#bBag{position:absolute;top:1.6cqh;right:22cqw;width:min(11cqh,50px);height:min(11cqh,50px);border-radius:14px;border:2px solid rgba(255,255,255,.7);background:rgba(20,14,34,.72);color:#fff;font-size:min(6cqh,24px);line-height:1;padding:0;z-index:4}
+#bZoom{position:absolute;top:1.6cqh;right:calc(22cqw + min(11cqh,50px) + 10px);height:min(11cqh,50px);padding:0 10px;border-radius:14px;border:2px solid rgba(255,255,255,.7);background:rgba(20,14,34,.72);color:#fff;font-size:min(4.6cqh,17px);font-weight:700;line-height:1;z-index:4;white-space:nowrap}
+#bZoom[hidden]{display:none}
+#bBag::before{content:"";position:absolute;inset:-8px}
+#bagN{position:absolute;right:-6px;top:-6px;min-width:18px;height:18px;border-radius:9px;background:#e33;color:#fff;font:700 11px/18px system-ui;font-style:normal;text-align:center;padding:0 4px}
+#bag{position:absolute;left:50%;top:6cqh;transform:translateX(-50%);width:min(62cqw,440px);background:rgba(14,10,24,.94);border:2px solid rgba(255,255,255,.35);border-radius:14px;padding:10px;z-index:6;color:#fff;font:600 clamp(11px,3cqh,14px) system-ui;box-shadow:0 8px 30px rgba(0,0,0,.6)}
+#bag .bh{display:flex;align-items:center;gap:10px;margin-bottom:8px}#bag .bh span{opacity:.7;flex:1;font-weight:500}
+#bagX{width:34px;height:30px;border-radius:8px;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:15px}
+#bagGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.bs{position:relative;height:min(15cqh,62px);border-radius:10px;border:2px solid rgba(255,255,255,.22);background:rgba(255,255,255,.08);padding:0}
+.bs img{width:min(9cqh,38px);height:min(9cqh,38px);image-rendering:pixelated}
+.bs b{position:absolute;right:5px;bottom:2px;font-size:13px;color:#fff;text-shadow:0 1px 3px #000}
+.bs.sel{border-color:#ffcf6b;background:rgba(255,207,107,.18)}.bs.empty{opacity:.45}
+#bagInfo{margin:8px 2px 6px;min-height:1.3em;opacity:.95}
+#bagAct{display:flex;flex-wrap:wrap;gap:6px}
+#bagHint{display:none;margin-top:6px;font-size:.7em;opacity:.7}body.padmode #bagHint{display:block}
+.ba{border:0;border-radius:9px;padding:8px 12px;color:#fff;font:700 13px system-ui}
+.ba.use{background:#2f9e5a}.ba.drop{background:#c07a1c}.ba.give{background:#2f6fd0}
+
+/* selos do controle (Xbox 360) nos botões de ação — aparecem só quando o controle está em uso */
+[data-pb]{position:relative}
+[data-pb]::after{content:attr(data-pb);display:none;position:absolute;left:-9px;top:-9px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;font:800 11px/16px system-ui;text-align:center;color:#fff;background:#555;border:2px solid #fff;pointer-events:none;z-index:2}
+body.padmode [data-pb]::after,body.gpon [data-pb]::after{display:block}
+[data-pb="A"]::after,.pb.a{background:#3fae3f}[data-pb="B"]::after,.pb.b{background:#d9382f}[data-pb="X"]::after,.pb.x{background:#2f6fe0}[data-pb="Y"]::after,.pb.y{background:#d9a300}
+[data-pb="LB"]::after,.pb.lb,.pb.rt{background:#6b6f7a}.pb.ls,.pb.rs{background:#3a3550}
+.pb{display:inline-block;min-width:3.6cqh;padding:.2cqh .9cqh;margin-right:.8cqh;border-radius:2cqh;border:.3cqh solid #fff;font-style:normal;font-weight:800;font-size:.95em;text-align:center;color:#fff}
+
+/* tela de configuração do controle */
+#padCfg{position:absolute;inset:0;z-index:9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.4cqh;padding:0 6cqw;background:rgba(5,3,12,.94);text-align:center;color:#fff}
+#padCfg h2{margin:0;font-size:5.4cqh;color:#ffcf6b;letter-spacing:.2cqh}
+#pcN{font-size:3cqh;opacity:.7}
+#pcT{font-size:5.2cqh;font-weight:800;min-height:17cqh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1cqh}
+#pcT small{font-size:2.8cqh;font-weight:600;opacity:.75}
+#padCfg .pb{font-size:.9em;padding:.4cqh 1.8cqh;margin:0}
+.pcr{display:flex;gap:2cqw}
+.pcr button{font-size:3.4cqh;font-weight:800;padding:1.2cqh 2.2cqw;border-radius:1.2cqh;border:0;background:#3a3550;color:#fff}
+#bCfg{font-size:3cqh!important;background:#2f3fd0!important;box-shadow:0 .7cqh 0 #151d6a!important}
+
+/* controle bluetooth conectado: ícone ON no canto inferior esquerdo; analógico e pulo invisíveis (opacidade 0, mas no lugar), mochila e porta/escada visíveis */
+#gpOn{display:none;position:absolute;left:1.6cqw;bottom:1.8cqh;z-index:4;align-items:center;gap:.8cqh;padding:.5cqh 1.3cqh;border-radius:2cqh;background:rgba(10,6,18,.7);border:.3cqh solid #3fae3f;color:#fff;font:700 2.6cqh/1 system-ui;pointer-events:none}
+#gpOn b{color:#6bff8a;font-weight:800}
+body.gpon #gpOn{display:inline-flex}
+/* só opacidade (nada de display:none): a câmera mede o analógico e o botão de pulo para manter o herói à frente deles */
+body.gpon #stick,body.gpon #bJ{opacity:0;pointer-events:none}
+body.gpon #bE{bottom:5cqh}
+
+/* abertura: botão pular + capa */
+#bSkip{position:absolute;right:2cqw;bottom:2.4cqh;z-index:15;font-size:3cqh;font-weight:800;padding:.9cqh 1.8cqw;border-radius:1cqh;border:2px solid rgba(255,255,255,.55);background:rgba(10,6,18,.62);color:#fff;letter-spacing:.2cqh}
+#cover{position:absolute;inset:0;z-index:20;background:#05080d;opacity:0;transition:opacity .9s ease;overflow:hidden}
+#cover.on{opacity:1}
+#coverBg{position:absolute;inset:-4%;width:108%;height:108%;object-fit:cover;filter:blur(2.2cqh) brightness(.55);pointer-events:none}
+#coverImg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;pointer-events:none;animation:coverZoom 14s ease-out both}
+@keyframes coverZoom{from{transform:scale(1.07)}to{transform:scale(1)}}
+#bPlay{position:absolute;left:50%;bottom:6cqh;transform:translateX(-50%);opacity:0;pointer-events:none;transition:opacity .8s;font-size:5.2cqh;font-weight:900;letter-spacing:.35cqh;padding:1.5cqh 4cqw;border-radius:1.6cqh;border:.35cqh solid #ffd34a;background:rgba(150,12,18,.92);color:#fff;text-shadow:0 .3cqh 0 #3a0508;box-shadow:0 0 3cqh rgba(255,60,40,.6),0 .8cqh 0 #4a0508;white-space:nowrap}
+#bPlay.on{opacity:1;pointer-events:auto;animation:playPulse 1.3s ease-in-out infinite}
+@keyframes playPulse{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.07)}}
+.bs.eq{border-color:#7dff9a;background:rgba(125,255,154,.18)}
