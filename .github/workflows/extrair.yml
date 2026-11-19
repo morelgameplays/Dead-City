@@ -1,0 +1,79 @@
+
+name: Extrair projeto Dead City
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '*.zip'
+      - '.github/workflows/extrair.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  extrair:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar repositório
+        uses: actions/checkout@v4
+
+      - name: Extrair arquivos do jogo
+        run: |
+          python3 - <<'PY'
+          import zipfile
+          from pathlib import Path, PurePosixPath
+
+          root = Path(".").resolve()
+
+          def extract(zip_name, destination, strip_prefixes=()):
+              archive = Path(zip_name)
+              if not archive.exists():
+                  raise FileNotFoundError(zip_name)
+
+              dest = root / destination
+              dest.mkdir(parents=True, exist_ok=True)
+
+              with zipfile.ZipFile(archive) as z:
+                  for info in z.infolist():
+                      if info.is_dir():
+                          continue
+
+                      name = PurePosixPath(info.filename)
+
+                      while name.parts and name.parts[0] in strip_prefixes:
+                          name = PurePosixPath(*name.parts[1:])
+
+                      if not name.parts or ".." in name.parts:
+                          continue
+
+                      target = dest.joinpath(*name.parts).resolve()
+                      if root not in target.parents:
+                          raise ValueError("Caminho inválido")
+
+                      target.parent.mkdir(parents=True, exist_ok=True)
+                      target.write_bytes(z.read(info))
+
+              print("Extraído:", zip_name)
+
+          extract("dead-city-base.zip", ".",
+                  ("dc",))
+
+          extract("dead-city-assets-i.zip", "assets/i",
+                  ("assets", "i"))
+
+          extract("dead-city-assets-resto.zip", "assets",
+                  ("assets",))
+
+          print("Projeto extraído com sucesso!")
+          PY
+
+      - name: Salvar arquivos no GitHub
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html style.css assets js
+          git commit -m "Extrair arquivos do Dead City" || echo "Sem alterações"
+          git push
+          
